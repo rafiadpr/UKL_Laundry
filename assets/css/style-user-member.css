@@ -1,0 +1,167 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins';
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+body {
+    background-image: url(../img/Login.png);
+}
+
+/* Navbar */
+.navbar {
+    height: 10vh;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0;
+}
+
+nav ul li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    background-color: #3C4048;
+    height: 60px;
+    width: 750px;
+    border-radius: 50px;
+    font-size: 18px;
+}
+
+nav ul li a {
+    margin: 0 52px;
+    color: #fff;
+}
+
+nav ul li a i {
+    text-decoration: none;
+    list-style: none;
+}
+
+nav h2 {
+    font-size: 34px;
+    font-weight: 700;
+    color: #3C4048;
+}
+
+.user {
+    display: flex;
+}
+
+.user h5 {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #3C4048;
+}
+
+/* Earnings & Customer */
+.earnings {
+    margin-top: 130px;
+}
+
+.earnings-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.earnings-card {
+    width: 500px;
+    height: 500px;
+    background-color: #3C4048;
+    border-radius: 50px;
+}
+
+.earnings-desc {
+    color: #fff;
+    margin: 9rem 0;
+}
+
+.earnings-desc h3 {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+}
+.earnings-desc h2 {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.earnings-desc h2 a {
+    color: white;
+}
+
+
+
+/* Member & User
+.user-member {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 100px;
+}
+
+.member {
+    
+}
+
+.member-wrapper {
+
+}
+
+.member-card {
+    background-color: #3C4048;
+    width: 400px;
+    height: 400px;
+}
+
+.member-desc {
+    
+}
+
+.member-desc a {
+    margin: 0 5rem;
+}
+
+.member-desc h3 {
+
+    color: white;
+}
+
+.user {
+
+}
+
+.user-wrapper {
+
+}
+
+.user-card {
+    background-color: #3C4048;
+    width: 400px;
+    height: 400px;
+}
+
+.user-card a {
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.user-card h3 {
+    display: flex;
+    justify-content: center;
+    color: white;
+} */

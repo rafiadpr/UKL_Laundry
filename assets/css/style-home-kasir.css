@@ -1,0 +1,119 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins';
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+body {
+    background-image: url(../img/Login.png);
+}
+
+/* Navbar */
+.navbar {
+    height: 10vh;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0;
+}
+
+nav ul li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    background-color: #3C4048;
+    height: 60px;
+    width: 500px;
+    border-radius: 50px;
+    font-size: 18px;
+}
+
+nav ul li a {
+    margin: 0 52px;
+    color: #FFFFFF;
+}
+
+nav ul li a i {
+    text-decoration: none;
+    list-style: none;
+}
+
+nav h2 {
+    font-size: 34px;
+    font-weight: 700;
+    color: #3C4048;
+}
+
+.user {
+    display: flex;
+}
+
+.user h5 {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #3C4048;
+}
+
+/* Jumbotron */
+.jumbotron {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.caption {
+    margin-top: 100px;
+    width: 50%;
+    color: #4D4D4D;
+}
+
+.caption h2 {
+    font-size: 84px;
+    font-weight: 800;
+}
+
+.caption p {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.product {
+    width: 50%;
+}
+
+.product-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    display: flex;
+    justify-content: center;
+    width: 35%;
+    height: 320px;
+    margin: 1rem 2.5rem;
+    background-color: #3C4048;
+    color: #fff;
+    border-radius: 50px;
+}
+
+.product-card img {
+    margin-top: 20px;
+}
+
+.product-card h4 {
+    display: flex;
+    justify-content: center;
+}

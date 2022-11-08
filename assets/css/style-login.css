@@ -1,0 +1,94 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins';
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+body {
+    background-image: url(../img/Login.png);
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5.5rem 6rem;
+    font-family: "Montserrat";
+}
+
+.navbar-logo h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #3C4048;
+}
+
+/* Login */
+.login {
+    margin: 60px 0;
+}
+.login-logo {
+    display: flex;
+    justify-content: center;
+}
+.login-logo h2 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #3C4048;
+}
+.login-form {
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+}
+.login-form #username {
+    width: 500px;
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 70%;
+    border-style: none;
+    background: none;
+}
+.login-form #password {
+    width: 500px;
+    margin-top: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 70%;
+    border-style: none;
+    background: none;
+}
+.login-form #checkbox {
+    margin-top: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    border-style: none;
+    background: none;
+}
+.login-form #login {
+    margin-left: 150px;
+    margin-top: 100px;
+    font-size: 18px;
+    font-weight: 600;
+    border-style: none;
+    border-radius: 25px;
+    background-color: #c1c1c1;
+    width: 204px;
+    height: 52px;
+    cursor: pointer;
+}
+.line-dark {
+    width: 500px;
+    height: 1px;
+    background-color: #000;
+    border-radius: 50px;
+}
