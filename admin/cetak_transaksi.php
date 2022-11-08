@@ -65,7 +65,7 @@
   </style>
   <img src="../assets/img/logo.png">
   <h2 class="align-center">LAPORAN TRANSAKSI LAUNDRY</h2>
-  <h3>Atlantic Laundry</h3>
+  <h3>Laundryaja</h3>
   <p class="header">Email: atlanticlaundry@gmail.com</p>
   <br>
   <hr style="width:100%" , size="3" , color=black>
