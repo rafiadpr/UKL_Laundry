@@ -114,3 +114,19 @@ td, th {
     text-align: left;
     padding: 8px;
 }
+.register {
+    margin: 3rem 3rem;
+}
+
+.register button {
+    background-color: #B2B2B2;
+    color: #3C4048;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 25px;
+    width: 200px;
+    height: 50px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}

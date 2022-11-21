@@ -164,11 +164,11 @@ $id_user = @$_SESSION['id'];
         <div class="mb-3">
           <label for="dibayar" class="form-label">Status Order</label>
           <select name="status" id="status" class="form-control">
-            <option></option>
+            <!-- <option></option> -->
             <option value="baru">Baru</option>
-            <option value="proses">Proses</option>
+            <!-- <option value="proses">Proses</option>
             <option value="selesai">Selesai</option>
-            <option value="diambil">Diambil</option>
+            <option value="diambil">Diambil</option> -->
           </select>
         </div>
 

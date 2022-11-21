@@ -21,7 +21,7 @@
                 <div class="earnings-card">
                     <div class="earnings-desc">
                         <h2><a href="tampil_user.php"><i class="fa-regular fa-user"></i></a></h2>
-                        <h3>Tampil User</h3>
+                        <h3>Tampil Kasir</h3>
                     </div>
                 </div>
                 <div class="earnings-card">

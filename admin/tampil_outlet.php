@@ -23,11 +23,18 @@
                         <h3>Report Outlet</h3>
                     </div>
 
+                    <form method=post action="tampil_outlet.php">
+                        <label for="cari">Search :</label>
+                        <input type="search" id="gsearch" name="cari">
+                        <input type="submit">
+                    </form>
+
                     <table>
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nama</th>
+                                <th>Pemilik</th>
                                 <th>Alamat</th>
                                 <th>No Telp</th>
                                 <th colspan="2">Aksi</th>
@@ -37,21 +44,23 @@
                         <tbody>
                         <?php
                         include "../koneksi.php";
-                        $sql = mysqli_query($conn, "SELECT o.id_outlet, o.nama, o.alamat, o.tlp FROM outlet o");
-                        $no = 0;
-
-                        $pan = mysqli_query($conn, "select * from outlet");
-                        $f = mysqli_num_rows($pan);
-
-                            while ($data_outlet = mysqli_fetch_array($sql)) {
+                        if(isset($_POST['cari'])){
+                            $cari = $_POST['cari'];
+                            $qry_outlet=mysqli_query($conn, "SELECT o.id_outlet, o.nama, o.alamat, o.tlp, o.id_owner, u.nama as nama_owner FROM outlet o JOIN user u ON o.id_owner=u.id where o.id_outlet = '$cari' or o.nama like '%$cari%' or o.alamat like '%$cari%' or o.tlp like '%$cari%' or o.id_owner like '%$cari%' or u.nama like '%$cari%'");
+                        }
+                        else{
+                            $qry_outlet = mysqli_query($conn, "SELECT o.id_outlet, o.nama, o.alamat, o.tlp, o.id_owner, u.nama as nama_owner FROM outlet o JOIN user u ON o.id_owner=u.id");
+                        }
+                            $no = 0;
+                            while ($data_outlet = mysqli_fetch_array($qry_outlet)) {
                             $no++;
-                            $hapus = "<a href='hapus_outlet.php?id=$data_outlet[id_outlet]' onclick='return confirm(Apakah anda yakin menghapus data ini?)' >Hapus</a>";
-                            $edit = "<a href='ubah_outlet.php?id=$data_outlet[id_outlet] '>Edit</a>";
-                            $transaksi = "<a href='ubah_outlet.php?id=$data_outlet[id_outlet] '>Transaksi</a>";
+                            $hapus = "<a href='hapus_outlet.php?id=$data_outlet[id_outlet]' onclick='return confirm(Apakah anda yakin menghapus data ini?)' style='color:red'>Hapus</a>";
+                            $edit = "<a href='ubah_outlet.php?id=$data_outlet[id_outlet]' style='color:white'>Edit</a>";
                         ?>
                             <tr>
                                 <td><?= $data_outlet['id_outlet'] ?></td>
                                 <td><?= $data_outlet['nama'] ?></td>
+                                <td><?= $data_outlet['nama_owner'] ?></td>
                                 <td><?= $data_outlet['alamat'] ?></td>
                                 <td><?= $data_outlet['tlp'] ?></td>
                                 <td><?= $edit ?></td>

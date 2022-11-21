@@ -27,6 +27,7 @@
             ?>
             <div class="login-form">
                 <form action="proses_ubah_user.php" method="post">
+                    <input type="hidden" id="id" name="action" value="<?=$_GET['action']?>">
                     <input type="hidden" id="id" name="id" value="<?= $dt_user['id'] ?>">
                     <input type="text" id="name" name="nama" value="<?= $dt_user['nama'] ?>">
                     <div class="line-dark"></div>

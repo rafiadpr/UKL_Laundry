@@ -75,13 +75,6 @@
         </div>
       </div>
        
-      <div class="mb-3">
-        <strong><label class="col-lg-4 col-form-label" for="val-email">Jumlah (kg)<span class="text-danger">*</span>
-          </label></strong>
-        <div class="col-lg-12">
-          <input type="text" class="form-control" id="val-email" name="qty" placeholder="Enter nama kelas.." value="<?= $data['qty'] ?>">
-        </div>
-      </div>
 
 
       <br><br>

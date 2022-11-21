@@ -1,5 +1,6 @@
 <?php
 include 'navbar.php';
+$id = @$_SESSION['id'];
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +12,7 @@ include 'navbar.php';
     <title>User</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/style-histori2.css">
+    <link rel="stylesheet" href="../assets/css/style-histori-kasir-owner.css">
 </head>
 <body>
 
@@ -21,7 +22,7 @@ include 'navbar.php';
             <div class="report-wrapper">
                 <div class="report-card">
                     <div class="report-desc">
-                        <h3>History</h3>
+                        <h3>History Outlet</h3>
                     </div>
                     
                     <table>
@@ -43,19 +44,19 @@ include 'navbar.php';
                         <tbody>
                         <?php
                         include "../koneksi.php";
-                        $sql = mysqli_query($conn, "SELECT t.id_transaksi, m.nama, t.tgl, t.batas_waktu, t.tgl_bayar, m.tlp, t.status, t.dibayar FROM transaksi t JOIN member m ON t.id_member=m.id_member order by id_transaksi desc");
+                        $sql = mysqli_query($conn, "SELECT t.id_transaksi, m.nama, t.tgl, t.batas_waktu, t.tgl_bayar, m.tlp, t.status, t.dibayar FROM transaksi t JOIN member m ON t.id_member=m.id_member JOIN outlet o ON t.id_outlet=o.id_outlet WHERE o.id_outlet = ". $_GET['id'] ." order by id_transaksi desc");
                         $no = 0;
                         
                         while ($data_transaksi = mysqli_fetch_array($sql)) {
-                            $pan = mysqli_query($conn, "SELECT d.id_detail_transaksi, d.id_paket, d.qty, d.subtotal, p.harga FROM detail_transaksi d JOIN paket p ON d.id_paket=p.id_paket where d.id_transaksi = ".$data_transaksi['id_transaksi']." ORDER BY id_detail_transaksi desc");
+                            $pan = mysqli_query($conn, "SELECT o.id_outlet, o.nama, o.alamat, d.subtotal FROM outlet o JOIN transaksi t ON t.id_outlet=o.id_outlet JOIN detail_transaksi d ON d.id_transaksi=t.id_transaksi where d.id_transaksi = ".$data_transaksi['id_transaksi']."  ORDER BY id_detail_transaksi desc");
                             // $f = mysqli_fetch_array($pan);
                             $total = 0;
                             while ($data_detail = mysqli_fetch_array($pan)){
                                 $total += $data_detail['subtotal'];
                             }
                             $no++;
-                            $cetak = "<a href='cetak_transaksi.php?id_transaksi=$data_transaksi[id_transaksi]' style='color:green'>Cetak</a>";
-                            $edit = "<a href='ubah_transaksi.php?id_transaksi=$data_transaksi[id_transaksi]' style='color:white'>Edit</a>";
+                            $cetak = "<a href='cetak_transaksi.php?id_transaksi=$data_transaksi[id_transaksi]'>Cetak</a>";
+                            $edit = "<a href='ubah_transaksi.php?id_transaksi=$data_transaksi[id_transaksi]'>Edit</a>";
                         ?>
                             <tr>
                                 <td><?= $data_transaksi['id_transaksi'] ?></td>

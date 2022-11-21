@@ -21,8 +21,14 @@ include 'navbar.php';
             <div class="report-wrapper">
                 <div class="report-card">
                     <div class="report-desc">
-                        <h3>Report User</h3>
+                        <h3>Kasir</h3>
                     </div>
+
+                    <form method=post action="tampil_user.php">
+                        <label for="cari">Search :</label>
+                        <input type="search" id="gsearch" name="cari">
+                        <input type="submit">
+                    </form>
                     
                     <table>
                         <thead>
@@ -38,17 +44,20 @@ include 'navbar.php';
                         <tbody>
                         <?php
                         include "../koneksi.php";
-                        $sql = mysqli_query($conn, "SELECT u.id, u.nama, u.username, u.role FROM user u");
-                        $no = 0;
-
-                        $pan = mysqli_query($conn, "select * from user");
-                        $f = mysqli_num_rows($pan);
-
-                            while ($data_user = mysqli_fetch_array($sql)) {
+                        if(isset($_POST['cari'])){
+                            $cari = $_POST['cari'];
+                            $qry_user=mysqli_query($conn, "select * from user where id = '$cari' or nama like '%$cari%' or username like '%$cari%'");
+                        }
+                        else {
+                        $qry_user = mysqli_query($conn, "SELECT u.id, u.nama, u.username, u.role FROM user u WHERE role='kasir'");
+                        }
+                            $action = "kasir";
+                            $no = 0;
+                            while ($data_user = mysqli_fetch_array($qry_user)) {
                             $no++;
-                            $hapus = "<a href='hapus_user.php?id=$data_user[id]' onclick='return confirm(Apakah anda yakin menghapus data ini?)'>Hapus</a>";
-                            $edit = "<a href='ubah_user.php?id=$data_user[id]'>Edit</a>";
-                            $transaksi = "<a href='tambah_transaksi.php?id=$data_user[id]'>Transaksi</a>";
+                            $hapus = "<a href='hapus_user.php?id=$data_user[id]' onclick='return confirm(Apakah anda yakin menghapus data ini?)' style='color:red'>Hapus</a>";
+                            $edit = "<a href='ubah_user.php?id=$data_user[id]&action=$action' style='color:white'>Edit</a>";
+                            $transaksi = "<a href='tambah_transaksi.php?id=$data_user[id]' style='color:green'>Transaksi</a>";
                         ?>
                             <tr>
                                 <td><?= $data_user['id'] ?></td>

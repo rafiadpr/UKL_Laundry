@@ -12,6 +12,7 @@
         $_SESSION['username'] = $r['username'];
         $_SESSION['password'] = $r['password'];
         $_SESSION['role'] = $r['role'];
+        $_SESSION['id_outlet'] = $r['id_outlet'];
         $_SESSION['status_login'] = true;
         if ($r['role'] == "admin") {
             header('location:./admin/home.php');

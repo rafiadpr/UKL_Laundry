@@ -23,6 +23,12 @@
                         <h3>Report Packages</h3>
                     </div>
 
+                    <form method=post action="tampil_paket.php">
+                        <label for="cari">Search :</label>
+                        <input type="search" id="gsearch" name="cari">
+                        <input type="submit">
+                    </form>
+
                     <table>
                         <thead>
                             <tr>
@@ -36,17 +42,19 @@
                         <tbody>
                         <?php
                         include "../koneksi.php";
-                        $sql = mysqli_query($conn, "SELECT p.id_paket, p.jenis, p.harga FROM paket p");
-                        $no = 0;
-
-                        $pan = mysqli_query($conn, "select * from paket");
-                        $f = mysqli_num_rows($pan);
-
-                            while ($data_paket = mysqli_fetch_array($sql)) {
+                        if(isset($_POST['cari'])){
+                            $cari = $_POST['cari'];
+                            $qry_paket=mysqli_query($conn, "select * from paket where id_paket = '$cari' or jenis like '%$cari%' or harga like '%$cari%'");
+                        }
+                        else{
+                            $qry_paket = mysqli_query($conn, "SELECT p.id_paket, p.jenis, p.harga FROM paket p");
+                        }
+                            $no = 0;
+                            while ($data_paket = mysqli_fetch_array($qry_paket)) {
                             $no++;
-                            $hapus = "<a href='hapus_paket.php?id=$data_paket[id_paket]' onclick='return confirm(Apakah anda yakin menghapus data ini?)' >Hapus</a>";
-                            $edit = "<a href='ubah_paket.php?id=$data_paket[id_paket] '>Edit</a>";
-                            $transaksi = "<a href='ubah_paket.php?id=$data_paket[id_paket] '>Transaksi</a>";
+                            $hapus = "<a href='hapus_paket.php?id=$data_paket[id_paket]' onclick='return confirm(Apakah anda yakin menghapus data ini?)' style='color:red'>Hapus</a>";
+                            $edit = "<a href='ubah_paket.php?id=$data_paket[id_paket]' style='color:white'>Edit</a>";
+                            $transaksi = "<a href='ubah_paket.php?id=$data_paket[id_paket]' style='color:green'>Transaksi</a>";
                         ?>
                             <tr>
                                 <td><?= $data_paket['id_paket'] ?></td>

@@ -1,3 +1,7 @@
+<?php
+$id = @$_SESSION['id'];
+// $id_outlet = @$_SESSION['id_outlet'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,29 +11,39 @@
     <title>Home</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/style-home-owner.css">
+    <link rel="stylesheet" href="../assets/css/style-home-owner3.css">
 </head>
 <body>
     <!-- Earnings & Customer -->
     <div class="container">
         <section class="earnings">
             <div class="earnings-wrapper">
-                <div class="earnings-card">
-                    <div class="earnings-desc">
-                        <h3>Earnings (Monthly)</h3>
-                        <h2>RP. 1,350,000,00</h2>
-                    </div>
-                </div>
+                    <?php
+                        include "../koneksi.php";
+                        $qry_outlet = mysqli_query($conn, "select * from outlet where id_owner = '$id'");
+                        $customer_count = 0;
+                        $total = 0;
+                        while ($data_outlet = mysqli_fetch_array($qry_outlet)) {
+                            $transaksi = mysqli_query($conn,"SELECT * FROM transaksi WHERE id_outlet = ".$data_outlet['id_outlet']."");
+                            $customer_count +=  mysqli_num_rows($transaksi);
+
+                            while ($data_transaksi = mysqli_fetch_array($transaksi)){
+                                $detail = mysqli_query($conn,"SELECT sum(subtotal) AS total FROM detail_transaksi WHERE id_transaksi = ".$data_transaksi['id_transaksi']."");
+                                $data_detail = mysqli_fetch_array($detail);
+                                $total += $data_detail['total'];
+                            }
+                        }
+                    ?>
                 <div class="earnings-card">
                     <div class="earnings-desc">
                         <h3>Earnings (Annual)</h3>
-                        <h2>RP. 9,650,000,00</h2>
+                        <h2>RP. <?= $total ?></h2>
                     </div>
                 </div>
                 <div class="earnings-card">
                     <div class="earnings-desc">
                         <h3>Customer (Weekly)</h3>
-                        <h2>43</h2>
+                        <h2><?= $customer_count ?></h2>
                     </div>
                 </div>
             </div>
@@ -45,43 +59,51 @@
                         <h3>Report Outlet</h3>
                     </div>
 
-                    <div class="report-outlet">
-                        <div class="outlet-id">
-                            <h5>ID</h5>
-                            <h6>1</h6>
-                            <h6>2</h6>
-                            <h6>3</h6>
-                        </div>
-                        <div class="outlet-name">
-                            <h5>Name</h5>
-                            <h6>Laundry Kawi</h6>
-                            <h6>Laundry Suhat</h6>
-                            <h6>Laundry Matos</h6>
-                        </div>
-                        <div class="outlet-address">
-                            <h5>Alamat</h5>
-                            <h6>Jl. Kawi Atas No.38, Gading Kasri, Kota Malang</h6>
-                            <h6>Jl. Soekarno Hatta No.36, Mojolangu, Kota Malang</h6>
-                            <h6>Jl. Veteran No.2, Penanggungan, Kota Malang</h6>
-                        </div>
-                        <div class="outlet-telp">
-                            <h5>No Telpon</h5>
-                            <h6>081328878542</h6>
-                            <h6>081234567890</h6>
-                            <h6>081234567890</h6>
-                        </div>
-                        <div class="outlet-total">
-                            <h5>Total</h5>
-                            <h6>RP. 6,000,000</h6>
-                            <h6>RP. 5,000,000</h6>
-                            <h6>RP. 6,000,000</h6>
-                        </div>
-                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Pendapatan</th>
+                                <th colspan="2">Aksi</th>
+                            </tr>
+                        </thead>
 
-                    <div class="total">
-                        <h1>Total</h1>
-                        <h2>RP. 17,000,000</h2>
-                    </div>
+                        <tbody>
+                        <?php
+                        include "../koneksi.php";
+                        $sql = mysqli_query($conn, "SELECT o.id_outlet, o.nama, o.alamat, o.tlp FROM outlet o WHERE o.id_owner = '$id'");
+                        $customer = mysqli_query($conn,'SELECT id_member FROM transaksi');
+                        $customer_count = mysqli_fetch_array($customer);
+                        $no = 0;
+                        
+                        while ($data_outlet = mysqli_fetch_array($sql)) {
+                            $pan = mysqli_query($conn, "SELECT d.id_detail_transaksi, d.id_transaksi, t.id_outlet, d.subtotal FROM detail_transaksi d JOIN transaksi t ON d.id_transaksi=t.id_transaksi JOIN outlet o ON t.id_outlet=o.id_outlet WHERE o.id_outlet = ".$data_outlet['id_outlet']."");
+                            // $f = mysqli_fetch_array($pan);
+                            $total = 0;
+                            while ($data_detail = mysqli_fetch_array($pan)){
+                                $total += $data_detail['subtotal'];
+                            }
+                            
+                            $no++;
+                            $hapus = "<a href='hapus_outlet.php?id=$data_outlet[id_outlet]' style='color:red' onclick='return confirm(Apakah anda yakin menghapus data ini?)' >Hapus</a>";
+                            $edit = "<a href='ubah_outlet.php?id=$data_outlet[id_outlet]' style='color:#D6E4E5' >Edit</a>";
+                            $transaksi = "<a href='ubah_outlet.php?id=$data_outlet[id_outlet] '>Transaksi</a>";
+                        ?>
+                            <tr>
+                                <td><?= $data_outlet['id_outlet'] ?></td>
+                                <td><?= $data_outlet['nama'] ?></td>
+                                <td><?= $data_outlet['alamat'] ?></td>
+                                <td><?= $total ?></td>
+                                <td><?= $edit ?></td>
+                                <td><?= $hapus ?></td>
+                            </tr>
+                            <?php
+                                }
+                            ?>
+                        </tbody>
+                      </table>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 <?php
     include 'navbar.php';
+    $id = @$_SESSION['id'];
 ?>
 
 <!DOCTYPE html>
@@ -21,13 +22,18 @@
                 <h2>Register Outlet</h2>
             </div>
             <div class="login-form">
-                <form action="proses_login.php" method="post">
-                    <input type="text" id="name" name="name" placeholder="Name"><br>
+                <form action="proses_tambah_outlet.php" method="post">
+                    <input type="text" id="name" name="nama" placeholder="Name"><br>
                     <div class="line-dark"></div>
-                    <input type="password" id="address" name="address" placeholder="Address"><br>
+
+                    <input type="text" id="address" name="alamat" placeholder="Address"><br>
                     <div class="line-dark"></div>
-                    <input type="text" id="telp" name="telp" placeholder="No. Telepon"><br>
+
+                    <input type="text" id="telp" name="tlp" placeholder="No. Telepon"><br>
                     <div class="line-dark"></div>
+
+                    <input type="hidden" id="name" name="id_user" value="<?=$_SESSION['id']?>">
+
                     <input type="submit" id="login" value="Register">
                 </form> 
             </div>

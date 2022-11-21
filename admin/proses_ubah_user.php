@@ -6,13 +6,22 @@ if($_POST){
     $password=$_POST['password'];
     $role=$_POST['role'];
         include "../koneksi.php";
-            $update=mysqli_query($conn,"update member set nama='".$nama ."', username='".$username ."', password='".md5($password)."', role='".$role."' where id = '".$id."' ") or die(mysqli_error($conn));
+            $update=mysqli_query($conn,"update user set nama='".$nama ."', username='".$username ."', password='".md5($password)."', role='".$role."' where id = '".$id."' ") or die(mysqli_error($conn));
             mysqli_error($conn);
             if($update){
-                echo "<script>alert('Sukses update member');location.href='tampil_user.php';</script>";
+                if($_POST['action'] == 'kasir'){
+                    echo "<script>alert('Sukses update User');location.href='tampil_user.php';</script>";
+                }
+                else if ($_POST['action'] == 'owner') {
+                    echo "<script>alert('Sukses update owner');location.href='home.php';</script>";
+                }
+                else{
+                    echo "salah";
+                }
+                
             } 
             else {
-                echo "<script>alert('Gagal update member');location.href='ubah_user.php?id=".$id."';</script>";
+                echo "<script>alert('Gagal update user');location.href='ubah_user.php?id=".$id."';</script>";
             }
         }
 ?>

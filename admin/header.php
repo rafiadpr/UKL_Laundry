@@ -7,7 +7,7 @@
     <title>Home</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/style-home-admin.css">
+    <link rel="stylesheet" href="../assets/css/style-home-admin3.css">
 </head>
 <body>
     <!-- Jumbotron -->
@@ -23,41 +23,52 @@
                 <div class="report-wrapper">
                     <div class="report-card">
                         <div class="report-desc">
-                            <h3>Owner’s Earnings (Monthly)</h3>
-                            <div class="report-owner">
-                                <div class="owner-id">
-                                    <h5>ID</h5>
-                                    <h6>1</h6>
-                                    <h6>2</h6>
-                                    <h6>3</h6>
-                                    <h6>4</h6>
-                                    <h6>5</h6>
-                                </div>
-                                <div class="owner-name">
-                                    <h5>Name</h5>
-                                    <h6>Andre</h6>
-                                    <h6>Tia</h6>
-                                    <h6>Ihsan</h6>
-                                    <h6>Jelita</h6>
-                                    <h6>Orin</h6>
-                                </div>
-                                <div class="owner-telp">
-                                    <h5>No Telpon</h5>
-                                    <h6>081328878542</h6>
-                                    <h6>081234567890</h6>
-                                    <h6>081234567890</h6>
-                                    <h6>081234567890</h6>
-                                    <h6>081234567890</h6>
-                                </div>
-                                <div class="owner-total">
-                                    <h5>Total</h5>
-                                    <h6>RP. 6,000,000</h6>
-                                    <h6>RP. 5,000,000</h6>
-                                    <h6>RP. 6,000,000</h6>
-                                    <h6>RP. 5,000,000</h6>
-                                    <h6>RP. 6,000,000</h6>
-                                </div>
-                            </div>
+                            <h3>Owners</h3>
+                        </div>
+                        
+                        <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th colspan="3">Aksi</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        <?php
+                        include "../koneksi.php";
+                        if(isset($_POST['cari'])){
+                            $cari = $_POST['cari'];
+                            $qry_user=mysqli_query($conn, "select * from user where id = '$cari' or nama like '%$cari%' or username like '%$cari%'");
+                        }
+                        else {
+                        $qry_user = mysqli_query($conn, "SELECT id, nama, username, role FROM user WHERE role='owner'");
+                        }
+                            $action = "owner";
+                            $no = 0;
+                            while ($data_user = mysqli_fetch_array($qry_user)) {
+                            $no++;
+                            $hapus = "<a href='hapus_user.php?id=$data_user[id]' onclick='return confirm(Apakah anda yakin menghapus data ini?)' style='color:red'>Hapus</a>";
+                            $edit = "<a href='ubah_user.php?id=$data_user[id]&action=$action' style='color:white'>Edit</a>";
+                        ?>
+                            <tr>
+                                <td><?= $data_user['id'] ?></td>
+                                <td><?= $data_user['nama'] ?></td>
+                                <td><?= $data_user['username'] ?></td>
+                                <td><?= $data_user['role'] ?></td>
+                                <td><?= $edit ?></td>
+                                <td><?= $hapus ?></td>
+                            </tr>
+                            <?php
+                                }
+                            ?>
+                        </tbody>
+                      </table>
+                        <div class="register">
+                            <a href="tambah_user.php"><button>Register</button></a>
                         </div>
                     </div>
                 </div>

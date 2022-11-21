@@ -73,7 +73,7 @@ nav h2 {
 
 .earnings-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .earnings-card {
