@@ -1,5 +1,8 @@
 <?php
 include 'navbar.php';
+if($_SESSION['status_login']!=true){
+    header('location: ../index.php');
+}
 ?>
 
 <!DOCTYPE html>

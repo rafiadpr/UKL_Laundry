@@ -22,14 +22,24 @@
             </div>
             <div class="login-form">
                 <form action="proses_tambah_user.php" method="post">
+                    <input type="hidden" id="id" name="action" value="<?=$_GET['action']?>">
                     <input type="text" id="name" name="nama" placeholder="Name"><br>
                     <div class="line-dark"></div>
+
                     <input type="text" id="address" name="username" placeholder="Username"><br>
                     <div class="line-dark"></div>
-                    <input type="text" id="gender" name="password" placeholder="Password"><br>
+
+                    <input type="password" id="gender" name="password" placeholder="Password"><br>
                     <div class="line-dark"></div>
-                    <input type="text" id="telp" name="role" placeholder="Role"><br>
+                    
+                    <select name="role" id="telp" class="form-control">
+                        <option value=""></option>
+                        <option value="admin">Admin</option>
+                        <option value="kasir">Kasir</option>
+                        <option value="owner">Owner</option>
+                    </select>
                     <div class="line-dark"></div>
+
                     <input type="submit" id="login" value="Register">
                 </form> 
             </div>

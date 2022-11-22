@@ -1,3 +1,8 @@
+<?php
+    if($_SESSION['status_login']!=true){
+        header('location: ../index.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,7 +73,7 @@
                         </tbody>
                       </table>
                         <div class="register">
-                            <a href="tambah_user.php"><button>Register</button></a>
+                            <a href="tambah_user.php?action=<?= $action ?>"><button>Register</button></a>
                         </div>
                     </div>
                 </div>

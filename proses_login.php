@@ -22,8 +22,8 @@
         }
         else if ($r['role'] == "owner") {
             header('location:./owner/home.php');
-        } 
-        else {
-            echo "<script>alert('Username dan Password tidak benar');location.href='index.php';</script>";
         }
+    }
+    else {
+        echo "<script>alert('Username dan Password tidak benar');location.href='index.php';</script>";
     }

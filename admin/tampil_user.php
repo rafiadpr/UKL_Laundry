@@ -74,7 +74,7 @@ include 'navbar.php';
                       </table>
 
                     <div class="register">
-                        <a href="tambah_user.php"><button>Register</button></a>
+                    <a href="tambah_user.php?action=<?= $action ?>"><button>Register</button></a>
                     </div>
                 </div>
             </div>

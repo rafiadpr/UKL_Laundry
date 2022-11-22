@@ -1,5 +1,8 @@
 <?php
 include 'navbar.php';
+if($_SESSION['status_login']!=true){
+    header('location: ../index.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +14,7 @@ include 'navbar.php';
     <title>User</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/style-histori-kasir-owner.css">
+    <link rel="stylesheet" href="../assets/css/style-histori2.css">
 </head>
 <body>
 
@@ -29,7 +32,6 @@ include 'navbar.php';
                             <tr>
                                 <th>ID</th>
                                 <th>Nama</th>
-                                <th>Tempat Outlet</th>
                                 <th>Tanggal Masuk</th>
                                 <th>Batas Waktu</th>
                                 <th>Tanggal Bayar</th>
@@ -44,7 +46,7 @@ include 'navbar.php';
                         <tbody>
                         <?php
                         include "../koneksi.php";
-                        $sql = mysqli_query($conn, "SELECT t.id_transaksi, m.nama, t.tgl, t.batas_waktu, t.tgl_bayar, m.tlp, t.status, t.dibayar, o.nama as nama_outlet FROM transaksi t JOIN member m ON t.id_member=m.id_member JOIN outlet o ON t.id_outlet=o.id_outlet order by id_transaksi desc");
+                        $sql = mysqli_query($conn, "SELECT t.id_transaksi, m.nama, t.tgl, t.batas_waktu, t.tgl_bayar, m.tlp, t.status, t.dibayar FROM transaksi t JOIN member m ON t.id_member=m.id_member order by id_transaksi desc");
                         $no = 0;
                         
                         while ($data_transaksi = mysqli_fetch_array($sql)) {
@@ -55,13 +57,12 @@ include 'navbar.php';
                                 $total += $data_detail['subtotal'];
                             }
                             $no++;
-                            $cetak = "<a href='cetak_transaksi.php?id_transaksi=$data_transaksi[id_transaksi]'>Cetak</a>";
-                            $edit = "<a href='ubah_transaksi.php?id_transaksi=$data_transaksi[id_transaksi]'>Edit</a>";
+                            $cetak = "<a href='cetak_transaksi.php?id_transaksi=$data_transaksi[id_transaksi]' style='color:green'>Cetak</a>";
+                            $edit = "<a href='ubah_transaksi.php?id_transaksi=$data_transaksi[id_transaksi]' style='color:white'>Edit</a>";
                         ?>
                             <tr>
                                 <td><?= $data_transaksi['id_transaksi'] ?></td>
                                 <td><?= $data_transaksi['nama'] ?></td>
-                                <td><?= $data_transaksi['nama_outlet'] ?></td>
                                 <td><?= $data_transaksi['tgl'] ?></td>
                                 <td><?= $data_transaksi['batas_waktu'] ?></td>
                                 <td><?= $data_transaksi['tgl_bayar'] ?></td>

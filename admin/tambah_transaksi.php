@@ -114,7 +114,6 @@ $id_user = @$_SESSION['id'];
               include "../koneksi.php";
               $qry_paket = mysqli_query($conn, "select * from paket");
               while ($data_paket = mysqli_fetch_array($qry_paket)) {
-              // foreach ($data_paket = mysqli_fetch_array($qry_paket) as $key => $value) {
             ?>
             <tr>
               <td><input type='checkbox' name='check[<?=$data_paket['id_paket']?>]' value='<?=$data_paket['id_paket']?>'></td>

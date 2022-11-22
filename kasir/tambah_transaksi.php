@@ -3,7 +3,7 @@
 
 <?php
 session_start();
-$id_user = @$_SESSION['id_user'];
+$id_user = @$_SESSION['id'];
 ?>
 
 <head>
@@ -14,12 +14,25 @@ $id_user = @$_SESSION['id_user'];
   <link rel="stylesheet" href="style.css">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+  <style>
+    table {
+    margin-left: 30px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 95%;
+  }
+  
+  td, th {
+      border: 1px solid black;
+      text-align: left;
+      padding: 8px;
+  }
+  </style>
 </head>
 
 <body>
   <div class="container">
-    <h1>Tambah Transaksi</h1>
+    <center><h1>Tambah Transaksi</h1></center>
     <form action="proses_tambah_transaksi.php" method="post">
 
         <div class="mb-3">
@@ -86,7 +99,36 @@ $id_user = @$_SESSION['id_user'];
           <input type="date" name="batas_waktu" class="form-control" required>
         </div>
 
-        <div class="mb-3">
+        <table>
+          <thead>
+            <tr>
+              <th>Checklist</th>
+              <th>Jenis Paket</th>
+              <th>Harga</th>
+              <th>Berat Barang /Kg</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <?php
+              include "../koneksi.php";
+              $qry_paket = mysqli_query($conn, "select * from paket");
+              while ($data_paket = mysqli_fetch_array($qry_paket)) {
+              // foreach ($data_paket = mysqli_fetch_array($qry_paket) as $key => $value) {
+            ?>
+            <tr>
+              <td><input type='checkbox' name='check[<?=$data_paket['id_paket']?>]' value='<?=$data_paket['id_paket']?>'></td>
+              <td><?= $data_paket['jenis'] ?></td>
+              <td><input type="number" name='harga[<?=$data_paket['id_paket']?>]' value = "<?=$data_paket['harga']?>"></td>
+              <td><input type="text" name='qty[<?=$data_paket['id_paket']?>]' value='0'></td>
+            </tr>
+            <?php
+              }
+            ?>
+          </tbody>
+        </table>
+
+        <!-- <div class="mb-3">
           <label for="id_paket" class="form-label">Nama Paket</label>
           <select name="id_paket" class="form-control">
             <option></option>
@@ -104,7 +146,7 @@ $id_user = @$_SESSION['id_user'];
           <label for="qty" class="form-label">Berat Barang /Kg</label>
           <input type="number" name="qty" class="form-control" required>
         </div>
-        
+         -->
         <div class="mb-3">
           <!-- <label for="id_user" class="form-label">Nama Petugas</label> -->
           <input type="hidden" name="id_user" class="form-control" value="<?= $id_user ?>">
@@ -122,11 +164,11 @@ $id_user = @$_SESSION['id_user'];
         <div class="mb-3">
           <label for="dibayar" class="form-label">Status Order</label>
           <select name="status" id="status" class="form-control">
-            <option></option>
+            <!-- <option></option> -->
             <option value="baru">Baru</option>
-            <option value="proses">Proses</option>
+            <!-- <option value="proses">Proses</option>
             <option value="selesai">Selesai</option>
-            <option value="diambil">Diambil</option>
+            <option value="diambil">Diambil</option> -->
           </select>
         </div>
 
@@ -141,9 +183,7 @@ $id_user = @$_SESSION['id_user'];
         <input type="submit" class="btn btn-primary mt-4 w-100" value="Tambah">
       </form>
     </div>
-    <?php
-    var_dump($id_user);
-    ?>
+<br>s
 </body>
 
 </html>

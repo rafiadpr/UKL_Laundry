@@ -1,3 +1,10 @@
+<?php
+session_start();
+if($_SESSION['status_login']!=true){
+    header('location: ../index.php');
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -32,7 +39,7 @@
     }
 
     img {
-      width: 140px;
+      width: 110px;
       position: absolute;
     }
 
@@ -63,9 +70,9 @@
       line-height: 20px;
     }
   </style>
-  <img src="../assets/img/logo.png">
+  <img src="../assets/img/Group 24.png">
   <h2 class="align-center">LAPORAN TRANSAKSI LAUNDRY</h2>
-  <h3>Atlantic Laundry</h3>
+  <h3>Laundryaja</h3>
   <p class="header">Email: atlanticlaundry@gmail.com</p>
   <br>
   <hr style="width:100%" , size="3" , color=black>

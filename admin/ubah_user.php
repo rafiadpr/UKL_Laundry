@@ -20,7 +20,7 @@
             <div class="login-logo">
                 <h2>Ubah user</h2>
             </div>
-            <?php 
+            <?php
             include "../koneksi.php";
             $qry_get_user = mysqli_query($conn, "select * from user where id = '" . $_GET['id'] . "'");
             $dt_user = mysqli_fetch_array($qry_get_user);

@@ -42,7 +42,7 @@ $id = @$_SESSION['id'];
                 </div>
                 <div class="earnings-card">
                     <div class="earnings-desc">
-                        <h3>Customer (Weekly)</h3>
+                        <h3>Customer</h3>
                         <h2><?= $customer_count ?></h2>
                     </div>
                 </div>
